@@ -6,9 +6,11 @@ import HomeScreen from '../pages/home';
 import SearchScreen from '../pages/search';
 import { StatusBar } from 'expo-status-bar';
 import Refresh from '../components/Refresh';
+import Search from '../components/Search';
 
 const iconsSize = 30
 const Tab = createBottomTabNavigator();
+
 
 const NavigationPages = () => {
     return (
@@ -50,7 +52,7 @@ const NavigationPages = () => {
                     size={100}
                     options={{
                         headerRight: () => (
-                            <Refresh size={25} color={"#045256"}/>
+                            <Refresh size={25} color={"#045256"} />
                         ),
                     }}
 
@@ -60,6 +62,11 @@ const NavigationPages = () => {
                 <Tab.Screen
                     name="Search"
                     component={SearchScreen}
+                    options={{
+                        headerRight: () => (
+                            <Search size={25} color={"#045256"}/>
+                        )
+                    }}
                 />
             </Tab.Navigator>
             <StatusBar style="auto" />
