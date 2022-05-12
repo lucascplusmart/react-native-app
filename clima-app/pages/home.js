@@ -8,12 +8,19 @@ import { useState, useEffect } from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import CardView from '../components/CardView';
 import CardInfo from '../components/CardInfo';
-
+import api from '../server/api';
 
 const HomeScreen = () => {
-    const [currentTemperature, setCurrentTemperature] = useState(0)
-    const [location, setLocation] = useState('')
+    const [currentTemperature, setCurrentTemperature] = useState()
 
+    const getRequest = async () => {
+        response = await api.get("/weather?key=44d09c68&user_ip=remote")
+        setCurrentTemperature(response.data.results)
+    }
+    useEffect(() => {
+        getRequest()
+
+    }, [])
 
     return (
         <ScrollView>
@@ -21,10 +28,13 @@ const HomeScreen = () => {
                 <MaterialCommunityIcons style={styles.iconSun} name="weather-sunny" size={50} color="orange" />
 
                 <View style={styles.temperature}>
-                    <Text style={styles.temperatureText}>{currentTemperature}</Text>
+                    <Text style={styles.temperatureText}>{currentTemperature.temp}</Text>
                     <Text style={[styles.temperatureText, { fontSize: 14 }]}>°c</Text>
                 </View>
-                <Text style={{ fontSize:14, color: "black"}}>cidade, hora</Text>
+                <Text style={{ fontSize: 14, color: "black" }}>{currentTemperature.city}</Text>
+                <Text style={{ fontSize: 14, color: "black" }}>{currentTemperature.description}</Text>
+
+
 
                 <View style={styles.cardView}>
                     <CardView title={"segunda"} temperature={0} backgroundColor={"#006092"} date={"15/05"} icon={"clear_day"} />
@@ -35,10 +45,11 @@ const HomeScreen = () => {
                 <View style={styles.info}>
                     <Text style={styles.infoText}>Informações adicionais</Text>
                     <View style={styles.infoCards}>
-                        <CardInfo title={'humidity'} value={49}/>
-                        <CardInfo title={'wind_speedy'} value={5}/>
-                        <CardInfo title={'description'} value={'Tempo nublado'}/>
-                        <CardInfo title={'currently'} value={'dia'}/>
+                        <CardInfo title={'Umidade'} value={currentTemperature.humidity} />
+                        <CardInfo title={'Vento'} value={currentTemperature.wind_speedy} />
+                        <CardInfo title={'Hora da medição'} value={currentTemperature.time} />
+                        <CardInfo title={'Turno'} value={currentTemperature.currently} />
+
                     </View>
                 </View>
 
@@ -80,16 +91,16 @@ const styles = StyleSheet.create({
         borderRadius: 28,
         width: 350,
         height: 200,
-        margin:10
+        margin: 10
     },
     infoText: {
         color: 'white',
-        fontSize:20,
-        fontWeight:'bold'
+        fontSize: 20,
+        fontWeight: 'bold'
     },
-    infoCards:{
+    infoCards: {
         flexDirection: 'row',
-        flexWrap:'wrap'
+        flexWrap: 'wrap'
     }
 
 });
