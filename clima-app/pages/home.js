@@ -11,11 +11,19 @@ import CardInfo from '../components/CardInfo';
 import api from '../server/api';
 
 const HomeScreen = () => {
-    const [currentTemperature, setCurrentTemperature] = useState()
+    const [currentTemperature, setCurrentTemperature] = useState({})
 
     const getRequest = async () => {
-        response = await api.get("/weather?key=44d09c68&user_ip=remote")
-        setCurrentTemperature(response.data.results)
+        api.get("/weather?key=44d09c68&user_ip=remote")
+            .then((response) => {
+                console.log("GET Response")
+                console.log(response.data);
+                setCurrentTemperature(response.data.results)
+            })
+            .catch(function (error) {
+                console.log("Error ao carregar dados",error);
+            });
+
     }
     useEffect(() => {
         getRequest()
