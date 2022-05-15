@@ -9,12 +9,35 @@ import CardView from '../components/CardView';
 import CardInfo from '../components/CardInfo';
 
 const HomeScreen = (props) => {
-    currentTemperature = props.data
-    console.log(currentTemperature)
+    let currentTemperature = props.data
+    let listDate =  props.data.forecast
+
+    const Icon = () => {
+        if (currentTemperature.currently === 'dia') {
+            return (
+                <MaterialCommunityIcons style={styles.iconSun} name="weather-sunny" size={50} color="orange" />
+            )
+        } else {
+            return (
+                <MaterialCommunityIcons style={styles.iconSun} name="moon-waning-crescent" size={24} color="black" />
+            )
+        }
+    }
+
+    const Card = () => {
+        return (
+            <View style={styles.cardView}>
+                <CardView title={listDate[1].weekday} temperature={listDate[1].max} backgroundColor={"#006092"} date={listDate[1].date} icon={listDate[1].condition} />
+                <CardView title={listDate[2].weekday} temperature={listDate[2].max} backgroundColor={"#006092"} date={listDate[2].date} icon={listDate[2].condition} />
+                <CardView title={listDate[3].weekday} temperature={listDate[3].max} backgroundColor={"#006092"} date={listDate[3].date} icon={listDate[3].condition} />
+            </View>
+        )
+    }
+
     return (
         <ScrollView>
             <View style={styles.container}>
-                <MaterialCommunityIcons style={styles.iconSun} name="weather-sunny" size={50} color="orange" />
+                <Icon></Icon>
 
                 <View style={styles.temperature}>
                     <Text style={styles.temperatureText}>{currentTemperature.temp}</Text>
@@ -23,13 +46,7 @@ const HomeScreen = (props) => {
                 <Text style={{ fontSize: 14, color: "black" }}>{currentTemperature.city}</Text>
                 <Text style={{ fontSize: 14, color: "black" }}>{currentTemperature.description}</Text>
 
-
-
-                <View style={styles.cardView}>
-                    <CardView title={"segunda"} temperature={0} backgroundColor={"#006092"} date={"15/05"} icon={"clear_day"} />
-                    <CardView title={"terça"} temperature={0} backgroundColor={"#006092"} date={"15/05"} icon={"cloudly_day"} />
-                    <CardView title={"quarta"} temperature={0} backgroundColor={"#006092"} date={"15/05"} icon={"rain"} />
-                </View>
+                {/* <Card/> */}
 
                 <View style={styles.info}>
                     <Text style={styles.infoText}>Informações adicionais</Text>
@@ -41,14 +58,11 @@ const HomeScreen = (props) => {
 
                     </View>
                 </View>
-
             </View>
         </ScrollView>
 
     );
 }
-
-
 
 const styles = StyleSheet.create({
     container: {

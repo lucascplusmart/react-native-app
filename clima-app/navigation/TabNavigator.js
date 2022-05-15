@@ -7,6 +7,7 @@ import SearchScreen from '../pages/search';
 import { StatusBar } from 'expo-status-bar';
 import Refresh from '../components/Refresh';
 import Search from '../components/Search';
+import CalendarScreen from '../pages/calendar';
 import api from '../server/api';
 import { useEffect, useState } from 'react';
 
@@ -19,15 +20,13 @@ const NavigationPages = () => {
     const [text, setText] = useState('')
 
     const getRequest = async () => {
-        console.log("aqui")
         api.get("/weather?key=clc886d3&user_ip=remote")
             .then((response) => {
-                // console.log("GET Response")
-                // console.log(response.data);
+
                 setCurrentTemperature(response.data.results)
             })
             .catch(function (error) {
-                console.log("Error ao carregar dados",error);
+                console.log("Error ao carregar dados", error);
             });
 
     }
@@ -62,6 +61,15 @@ const NavigationPages = () => {
                                     color={color}
                                 />
                             );
+                        } else if (route.name === 'Calendar') {
+                            return (
+                                <Ionicons
+                                    name={focused ? 'calendar' : 'calendar-outline'}
+                                    size={iconsSize}
+                                    color={color}
+                                />
+                            )
+
                         }
                     },
                     tabBarInactiveTintColor: 'gray',
@@ -71,12 +79,12 @@ const NavigationPages = () => {
                 {/* Screen Home Page*/}
                 <Tab.Screen
                     name="Home"
-                    children={ () => <HomeScreen data={currentTemperature} />}
+                    children={() => <HomeScreen data={currentTemperature} />}
                     // options={{ tabBarBadge: 3 }}
                     size={100}
                     options={{
                         headerRight: () => (
-                            <Refresh size={25} color={"#045256"} getRequest={getRequest}/>
+                            <Refresh size={25} color={"#045256"} getRequest={getRequest} />
                         ),
                     }}
                 />
@@ -84,13 +92,19 @@ const NavigationPages = () => {
                 {/* Screen serch Page*/}
                 <Tab.Screen
                     name="Search"
-                    children={ () => <SearchScreen cityName={text} />}
+                    children={() => <SearchScreen cityName={text} />}
                     options={{
                         headerRight: () => (
-                            <Search size={25} color={"#045256"} setText={setText} text={text}/>
+                            <Search size={25} color={"#045256"} setText={setText} text={text} />
                         )
                     }}
                 />
+
+                <Tab.Screen
+                    name="Calendar"
+                    component={CalendarScreen}
+                />
+
             </Tab.Navigator>
             <StatusBar style="auto" />
         </NavigationContainer>
