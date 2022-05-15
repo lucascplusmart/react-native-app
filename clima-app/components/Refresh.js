@@ -3,8 +3,9 @@ import { TouchableOpacity,StyleSheet } from 'react-native';
 import React from 'react';
 
 const Refresh = (props) =>{
+
     return(
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity  onPress={()=>props.getRequest()} style={styles.container}>
             <FontAwesome name="refresh" size={props.size} color={props.color} />
         </TouchableOpacity>
     )

@@ -7,12 +7,35 @@ import SearchScreen from '../pages/search';
 import { StatusBar } from 'expo-status-bar';
 import Refresh from '../components/Refresh';
 import Search from '../components/Search';
+import api from '../server/api';
+import { useEffect, useState } from 'react';
 
 const iconsSize = 30
 const Tab = createBottomTabNavigator();
 
 
 const NavigationPages = () => {
+    const [currentTemperature, setCurrentTemperature] = useState({})
+
+    const getRequest = async () => {
+        console.log("aqui")
+        api.get("/weather?key=clc886d3&user_ip=remote")
+            .then((response) => {
+                // console.log("GET Response")
+                // console.log(response.data);
+                setCurrentTemperature(response.data.results)
+            })
+            .catch(function (error) {
+                console.log("Error ao carregar dados",error);
+            });
+
+    }
+    useEffect(() => {
+        getRequest()
+
+    }, [])
+
+
     return (
         <NavigationContainer>
             <Tab.Navigator
@@ -47,17 +70,16 @@ const NavigationPages = () => {
                 {/* Screen Home Page*/}
                 <Tab.Screen
                     name="Home"
-                    component={HomeScreen}
+                    children={ () => <HomeScreen data={currentTemperature} />}
                     // options={{ tabBarBadge: 3 }}
                     size={100}
                     options={{
                         headerRight: () => (
-                            <Refresh size={25} color={"#045256"} />
+                            <Refresh size={25} color={"#045256"} getRequest={getRequest}/>
                         ),
                     }}
-
-
                 />
+
                 {/* Screen serch Page*/}
                 <Tab.Screen
                     name="Search"

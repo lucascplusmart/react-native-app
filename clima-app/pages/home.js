@@ -4,32 +4,13 @@ import {
     View,
     ScrollView
 } from 'react-native';
-import { useState, useEffect } from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import CardView from '../components/CardView';
 import CardInfo from '../components/CardInfo';
-import api from '../server/api';
 
-const HomeScreen = () => {
-    const [currentTemperature, setCurrentTemperature] = useState({})
-
-    const getRequest = async () => {
-        api.get("/weather?key=c1c886d3&user_ip=remote")
-            .then((response) => {
-                console.log("GET Response")
-                console.log(response.data);
-                setCurrentTemperature(response.data.results)
-            })
-            .catch(function (error) {
-                console.log("Error ao carregar dados",error);
-            });
-
-    }
-    useEffect(() => {
-        getRequest()
-
-    }, [])
-
+const HomeScreen = (props) => {
+    currentTemperature = props.data
+    console.log(currentTemperature)
     return (
         <ScrollView>
             <View style={styles.container}>
