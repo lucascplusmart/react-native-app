@@ -16,6 +16,7 @@ const Tab = createBottomTabNavigator();
 
 const NavigationPages = () => {
     const [currentTemperature, setCurrentTemperature] = useState({})
+    const [text, setText] = useState('')
 
     const getRequest = async () => {
         console.log("aqui")
@@ -83,10 +84,10 @@ const NavigationPages = () => {
                 {/* Screen serch Page*/}
                 <Tab.Screen
                     name="Search"
-                    component={SearchScreen}
+                    children={ () => <SearchScreen cityName={text} />}
                     options={{
                         headerRight: () => (
-                            <Search size={25} color={"#045256"}/>
+                            <Search size={25} color={"#045256"} setText={setText} text={text}/>
                         )
                     }}
                 />

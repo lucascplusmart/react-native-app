@@ -4,10 +4,9 @@ import { FontAwesome } from '@expo/vector-icons';
 import {getRequest} from '../pages/search' 
 
 const Search = (props) => {
-    const [text, setText] = useState('')
-    console.log("digitando:")
-    console.log(text)
-
+    
+    const [value, setValue] = useState("")
+    console.log(value)
     return(
         <SafeAreaView style={styles.container}>
             <TouchableOpacity style={styles.buttonSearch}>
@@ -15,13 +14,14 @@ const Search = (props) => {
                 name='search' 
                 size={props.size} 
                 color={props.color}
-                onPress={() => {}}/> 
+                onPress={() => props.setText(value)}
+                /> 
             </TouchableOpacity>
             <TextInput 
             style={styles.inputSearch} 
             placeholder='Cidade, país...'
-            value={text}
-            onChangeText={(value) => setText(value)}
+            value={value}
+            onChangeText={(value) => setValue(value)}
             />
 
         </SafeAreaView>

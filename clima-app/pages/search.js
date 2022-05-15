@@ -2,11 +2,12 @@ import { StyleSheet, ScrollView, Text, View } from 'react-native';
 import api from '../server/api';
 import { useState, useEffect } from 'react';
 
-const SearchScreen = () => {
+const SearchScreen = (props) => {
     const [cityClimate, setCityClimate] = useState({})
-
+    console.log(props.cityName)
     const getRequest = async () => {
-        api.get("/weather?key=c1c886d3&city_name=Crato,ce")
+        
+        api.get(`/weather?key=c1c886d3&city_name=${props.cityName}`)
             .then((response) => {
                 console.log("GET Response")
                 console.log(response.data);
@@ -26,7 +27,7 @@ const SearchScreen = () => {
     return (
         <ScrollView >
             <View>
-                <Text>{cityClimate.description}</Text>
+                <Text>{cityClimate.city_name}</Text>
             </View>
         </ScrollView>
     );
