@@ -1,15 +1,27 @@
-import React from 'react';
-import { SafeAreaView, TouchableOpacity, StyleSheet, TextInput} from 'react-native';
+import React, { useState } from 'react';
+import { SafeAreaView, TouchableOpacity, StyleSheet, TextInput, Keyboard} from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
+import {getRequest} from '../pages/search' 
 
 const Search = (props) => {
+    const [text, setText] = useState('')
+    console.log("digitando:")
+    console.log(text)
+
     return(
         <SafeAreaView style={styles.container}>
             <TouchableOpacity style={styles.buttonSearch}>
-                <FontAwesome name='search' size={props.size} color={props.color}/>
+                <FontAwesome 
+                name='search' 
+                size={props.size} 
+                color={props.color}
+                onPress={() => {}}/> 
             </TouchableOpacity>
-            <TextInput style={styles.inputSearch} placeholder='Cidade, país...'
-            
+            <TextInput 
+            style={styles.inputSearch} 
+            placeholder='Cidade, país...'
+            value={text}
+            onChangeText={(value) => setText(value)}
             />
 
         </SafeAreaView>

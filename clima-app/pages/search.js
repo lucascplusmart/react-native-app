@@ -6,7 +6,7 @@ const SearchScreen = () => {
     const [cityClimate, setCityClimate] = useState({})
 
     const getRequest = async () => {
-        api.get("/weather?key=44d09c68&city_name=Crato,ce")
+        api.get("/weather?key=c1c886d3&city_name=Crato,ce")
             .then((response) => {
                 console.log("GET Response")
                 console.log(response.data);

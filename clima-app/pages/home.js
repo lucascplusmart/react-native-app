@@ -14,7 +14,7 @@ const HomeScreen = () => {
     const [currentTemperature, setCurrentTemperature] = useState({})
 
     const getRequest = async () => {
-        api.get("/weather?key=44d09c68&user_ip=remote")
+        api.get("/weather?key=c1c886d3&user_ip=remote")
             .then((response) => {
                 console.log("GET Response")
                 console.log(response.data);
