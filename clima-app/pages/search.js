@@ -3,16 +3,19 @@ import api from '../server/api';
 import { useState, useEffect } from 'react';
 
 const SearchScreen = (props) => {
+
+    if (props.cityName === '') {
+        return null
+        
+    }
     const [cityClimate, setCityClimate] = useState({})
-    console.log(props.cityName)
+
+
     const getRequest = async () => {
         
         api.get(`/weather?key=c1c886d3&city_name=${props.cityName}`)
-            .then((response) => {
-                console.log("GET Response")
-                console.log(response.data);
+            .then((response) => {    
                 setCityClimate(response.data.results)
-                console.log(cityClimate)
             })
             .catch(function (error) {
                 console.log("Error ao carregar dados cidade",error);
@@ -22,14 +25,12 @@ const SearchScreen = (props) => {
     useEffect(() => {
         getRequest()
 
-    }, [])
+    }, [props.cityName])
 
     return (
-        <ScrollView >
-            <View>
+            <View  style={styles.container}  >
                 <Text>{cityClimate.city_name}</Text>
             </View>
-        </ScrollView>
     );
 }
 
