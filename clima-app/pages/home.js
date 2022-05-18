@@ -5,8 +5,10 @@ import {
     ScrollView
 } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import CardView from '../components/CardView';
 import CardInfo from '../components/CardInfo';
+import WeatherList from '../components/WeatherListing';
+import * as Location from 'expo-location';
+import { useState, useEffect } from 'react';
 
 const HomeScreen = (props) => {
     let currentTemperature = props.data
@@ -24,15 +26,26 @@ const HomeScreen = (props) => {
         }
     }
 
-    const Card = () => {
-        return (
-            <View style={styles.cardView}>
-                <CardView title={listDate[1].weekday} temperature={listDate[1].max} backgroundColor={"#006092"} date={listDate[1].date} icon={listDate[1].condition} />
-                <CardView title={listDate[2].weekday} temperature={listDate[2].max} backgroundColor={"#006092"} date={listDate[2].date} icon={listDate[2].condition} />
-                <CardView title={listDate[3].weekday} temperature={listDate[3].max} backgroundColor={"#006092"} date={listDate[3].date} icon={listDate[3].condition} />
-            </View>
-        )
+    async function getLocation () {
+        let {locationStatus} = await Location.requestForegroundPermissionsAsync()
+
+        if (locationStatus !== 'granted'){
+            console.log("Acesso negado")
+        }else{
+            console.log("Acesso permitido")
+            let location = await Location.getCurrentPositionAsync({});
+            setGeoLocation(location.coords);
+            console.log(location)
+            console.log(location.coords)            
+        }
     }
+
+    useEffect(() => {
+        getLocation()
+
+    }, [])
+
+
 
     return (
         <ScrollView>
@@ -46,7 +59,7 @@ const HomeScreen = (props) => {
                 <Text style={{ fontSize: 14, color: "black" }}>{currentTemperature.city}</Text>
                 <Text style={{ fontSize: 14, color: "black" }}>{currentTemperature.description}</Text>
 
-                {/* <Card/> */}
+                <WeatherList dados={listDate}/>
 
                 <View style={styles.info}>
                     <Text style={styles.infoText}>Informações adicionais</Text>

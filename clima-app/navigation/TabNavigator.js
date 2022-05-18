@@ -10,6 +10,9 @@ import Search from '../components/Search';
 import CalendarScreen from '../pages/calendar';
 import api from '../server/api';
 import { useEffect, useState } from 'react';
+import {View} from 'react-native';
+import SendEmail from '../components/SendEmail';
+import InfoScreen from '../pages/Info';
 
 const iconsSize = 30
 const Tab = createBottomTabNavigator();
@@ -70,6 +73,14 @@ const NavigationPages = () => {
                                 />
                             )
 
+                        }else if (route.name === 'Information') {
+                            return (
+                                <Ionicons
+                                    name={focused ? 'information-circle' : 'information-circle-outline'}
+                                    size={iconsSize}
+                                    color={color}
+                                />
+                            )
                         }
                     },
                     tabBarInactiveTintColor: 'gray',
@@ -84,7 +95,11 @@ const NavigationPages = () => {
                     size={100}
                     options={{
                         headerRight: () => (
-                            <Refresh size={25} color={"#045256"} getRequest={getRequest} />
+                            <View style={{  flex: 1,
+                                flexDirection: 'row'}}>
+                                <Refresh size={25} color={"#045256"} getRequest={getRequest} />
+                                <SendEmail size={25} color={"#045256"}/>
+                            </View>
                         ),
                     }}
                 />
@@ -105,10 +120,16 @@ const NavigationPages = () => {
                     component={CalendarScreen}
                 />
 
+                <Tab.Screen
+                    name="Information"
+                    component={InfoScreen}
+                />
+
             </Tab.Navigator>
             <StatusBar style="auto" />
         </NavigationContainer>
     );
 }
+
 
 export default NavigationPages

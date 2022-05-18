@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, TouchableOpacity, StyleSheet, TextInput, Keyboard } from 'react-native';
+import { SafeAreaView, TouchableOpacity, StyleSheet, TextInput } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 
 const Search = (props) => {
