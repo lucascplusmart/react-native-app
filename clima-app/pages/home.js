@@ -8,11 +8,13 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import CardInfo from '../components/CardInfo';
 import WeatherList from '../components/WeatherListing';
 import * as Location from 'expo-location';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const HomeScreen = (props) => {
     let currentTemperature = props.data
     let listDate =  props.data.forecast
+
+    const [geoLocation, setGeoLocation] = useState({})
 
     const Icon = () => {
         if (currentTemperature.currently === 'dia') {
@@ -27,16 +29,18 @@ const HomeScreen = (props) => {
     }
 
     async function getLocation () {
-        let {locationStatus} = await Location.requestForegroundPermissionsAsync()
+        let locationStatus = await Location.requestForegroundPermissionsAsync()
 
-        if (locationStatus !== 'granted'){
+        console.log("1 - ", locationStatus)
+
+        if ((locationStatus.status !== 'granted') || (!locationStatus.granted)){
             console.log("Acesso negado")
         }else{
             console.log("Acesso permitido")
             let location = await Location.getCurrentPositionAsync({});
             setGeoLocation(location.coords);
-            console.log(location)
-            console.log(location.coords)            
+            console.log("2 - coords", geoLocation)
+                       
         }
     }
 
