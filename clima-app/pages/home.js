@@ -9,6 +9,7 @@ import CardInfo from '../components/CardInfo';
 import WeatherList from '../components/WeatherListing';
 import * as Location from 'expo-location';
 import { useEffect, useState } from 'react';
+import Map from '../components/Map';
 
 const HomeScreen = (props) => {
     let currentTemperature = props.data
@@ -31,16 +32,13 @@ const HomeScreen = (props) => {
     async function getLocation () {
         let locationStatus = await Location.requestForegroundPermissionsAsync()
 
-        console.log("1 - ", locationStatus)
-
         if ((locationStatus.status !== 'granted') || (!locationStatus.granted)){
             console.log("Acesso negado")
         }else{
             console.log("Acesso permitido")
             let location = await Location.getCurrentPositionAsync({});
             setGeoLocation(location.coords);
-            console.log("2 - coords", geoLocation)
-                       
+                                  
         }
     }
 
@@ -74,6 +72,15 @@ const HomeScreen = (props) => {
                         <CardInfo title={'Turno'} value={currentTemperature.currently} />
 
                     </View>
+                </View>
+
+                <View>
+                    <Map 
+                    latitude={geoLocation.latitude}
+                    longitude={geoLocation.longitude}
+                    city={currentTemperature.city} 
+                    description={currentTemperature.description}
+                    />
                 </View>
             </View>
         </ScrollView>
