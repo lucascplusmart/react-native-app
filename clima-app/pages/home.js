@@ -2,18 +2,22 @@ import {
     StyleSheet,
     Text,
     View,
-    ScrollView
+    ScrollView,
+    Alert
 } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import CardInfo from '../components/CardInfo';
 import WeatherList from '../components/WeatherListing';
-import * as Location from 'expo-location';
 import { useEffect, useState } from 'react';
 import Map from '../components/Map';
+import { WindowHeight, WindowWidth } from '../utils/dimesion';
+import GeoLocation from '../utils/geoLocation';
+
+
 
 const HomeScreen = (props) => {
     let currentTemperature = props.data
-    let listDate =  props.data.forecast
+    let listDate = props.data.forecast
 
     const [geoLocation, setGeoLocation] = useState({})
 
@@ -29,17 +33,19 @@ const HomeScreen = (props) => {
         }
     }
 
-    async function getLocation () {
-        let locationStatus = await Location.requestForegroundPermissionsAsync()
+    async function getLocation() {
+        let coords = await GeoLocation()
+        if (coords === 0) {
+            Alert.alert(
+                "Acesso negado",
+                "Ative a geo localização do dispositivo para obter as informações geográficas",
+                [
+                    { text: "OK", onPress: () => null }
+                ]
+            );
 
-        if ((locationStatus.status !== 'granted') || (!locationStatus.granted)){
-            console.log("Acesso negado")
-        }else{
-            console.log("Acesso permitido")
-            let location = await Location.getCurrentPositionAsync({});
-            setGeoLocation(location.coords);
-                                  
         }
+        setGeoLocation(coords);
     }
 
     useEffect(() => {
@@ -61,7 +67,7 @@ const HomeScreen = (props) => {
                 <Text style={{ fontSize: 14, color: "black" }}>{currentTemperature.city}</Text>
                 <Text style={{ fontSize: 14, color: "black" }}>{currentTemperature.description}</Text>
 
-                <WeatherList dados={listDate}/>
+                <WeatherList dados={listDate} />
 
                 <View style={styles.info}>
                     <Text style={styles.infoText}>Informações adicionais</Text>
@@ -70,16 +76,15 @@ const HomeScreen = (props) => {
                         <CardInfo title={'Vento'} value={currentTemperature.wind_speedy} />
                         <CardInfo title={'Hora da medição'} value={currentTemperature.time} />
                         <CardInfo title={'Turno'} value={currentTemperature.currently} />
-
                     </View>
                 </View>
 
                 <View>
-                    <Map 
-                    latitude={geoLocation.latitude}
-                    longitude={geoLocation.longitude}
-                    city={currentTemperature.city} 
-                    description={currentTemperature.description}
+                    <Map
+                        latitude={geoLocation.latitude}
+                        longitude={geoLocation.longitude}
+                        city={currentTemperature.city}
+                        description={currentTemperature.description}
                     />
                 </View>
             </View>
@@ -116,8 +121,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#006092',
         borderRadius: 28,
-        width: 350,
-        height: 200,
+        width: 0.9 * WindowWidth,
+        height: 0.3 * WindowHeight,
         margin: 10
     },
     infoText: {
