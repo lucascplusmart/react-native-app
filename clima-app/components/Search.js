@@ -13,7 +13,7 @@ const Search = (props) => {
 
             <TextInput
                 style={styles.inputSearch}
-                placeholder='Cidade, país...'
+                placeholder='Digite o nome da cidade'
                 value={value}
                 onChangeText={(value) => setValue(value)}
             />
