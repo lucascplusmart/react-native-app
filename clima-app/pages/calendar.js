@@ -1,26 +1,16 @@
-import { StyleSheet,useWindowDimensions, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { CalendarList } from 'react-native-calendars';
-import { Dimensions } from 'react-native';
-
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height
-
-
+import { WindowWidth, WindowHeight  } from '../utils/dimesion';
 
 const ClendarScreen = () => {
 
     return (
         <View style={styles.container}  >
             <CalendarList
-                // Enable horizontal scrolling, default = false
                 horizontal={true}
-                // Enable paging on horizontal, default = false
                 pagingEnabled={true}
-                // Set custom calendarWidth.
-                calendarWidth={windowWidth}
-                calendarHeight={windowHeight}
-               
-
+                calendarWidth={WindowWidth}
+                calendarHeight={WindowHeight}
             />
         </View>
     );

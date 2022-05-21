@@ -16,14 +16,14 @@ import InfoScreen from '../pages/Info';
 
 const iconsSize = 30
 const Tab = createBottomTabNavigator();
-
+var config = require('../config.json');
 
 const NavigationPages = () => {
     const [currentTemperature, setCurrentTemperature] = useState({})
     const [text, setText] = useState('')
 
     const getRequest = async () => {
-        api.get("/weather?key=clc886d3&user_ip=remote")
+        api.get(`/weather?key=${config.key_01}&user_ip=remote`)
             .then((response) => {
 
                 setCurrentTemperature(response.data.results)

@@ -3,19 +3,9 @@ import { Button, Text, View, StyleSheet, TouchableOpacity, Pressable, TextInput 
 import Modal from "react-native-modal";
 import { FontAwesome } from '@expo/vector-icons';
 import SendEmailUser from "../mail/ send-email";
+import { WindowWidth, WindowHeight } from '../utils/dimesion';
 
 
-const ModalSendEmail = () => {
-
-
-    return (
-        <View style={{ flex: 1 }}>
-            <Button title="Show modal" onPress={toggleModal} />
-
-
-        </View>
-    );
-}
 
 
 const SendEmail = (props) => {
@@ -43,7 +33,7 @@ const SendEmail = (props) => {
         <View>
             <Modal isVisible={isModalVisible}>
                 <View style={styles.centeredView}>
-                    <View style={[styles.modalView, { width: 250, height: 500 }]}>
+                    <View style={[styles.modalView, { width: 0.8* WindowWidth , height: 0.7 * WindowWidth  }]}>
                         <Text style={styles.header}>E-mail</Text>
                         <TextInput
                             placeholder="Destinatario do e-mail"

@@ -1,5 +1,6 @@
-import MapView, {Marker} from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 import { StyleSheet, View, Dimensions } from 'react-native';
+import { WindowWidth } from '../utils/dimesion';
 
 const Map = (props) => {
     let lat = (props.latitude) ? (props.latitude) : -43.12467
@@ -9,21 +10,21 @@ const Map = (props) => {
     return (
         <View>
             <MapView style={styles.mapStyle}
-            region={{
-                latitude: lat,
-                longitude: long,
-                latitudeDelta: 0.099,
-                longitudeDelta: 0.041,
-            }}
+                region={{
+                    latitude: lat,
+                    longitude: long,
+                    latitudeDelta: 0.099,
+                    longitudeDelta: 0.041,
+                }}
             >
-            <Marker
-            coordinate={{
-                longitude: long,
-                latitude: lat
-              }}
-            title={props.city}
-            description={props.description}
-            />
+                <Marker
+                    coordinate={{
+                        longitude: long,
+                        latitude: lat
+                    }}
+                    title={props.city}
+                    description={props.description}
+                />
 
             </MapView>
         </View>
@@ -31,12 +32,12 @@ const Map = (props) => {
 }
 
 const styles = StyleSheet.create({
-    mapStyle:{
+    mapStyle: {
         marginTop: 20,
         marginLeft: 20,
         marginRight: 20,
         marginBottom: 30,
-        width: (Dimensions.get('window').width) - 20,
+        width: WindowWidth - 20,
         height: 300,
     }
 })

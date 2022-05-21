@@ -1,5 +1,6 @@
 import { StyleSheet, View, Text } from 'react-native';
 import React from 'react';
+import { WindowWidth } from '../utils/dimesion';
 
 const CardInfo = (props) => {
 
@@ -15,7 +16,7 @@ const styles = StyleSheet.create({
     card: {
         alignItems: 'center',
         margin: 10,
-        minWidth: 150,
+        minWidth: 0.39 * WindowWidth,
     },
     text: {
         color: '#e0e0e0',
