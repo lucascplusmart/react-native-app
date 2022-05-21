@@ -10,10 +10,10 @@ const SearchScreen = (props) => {
 
     if (props.cityName === '') {
         return (
-            <View style={styles.inicial}>
+            <View style={styles.containerInicial}>
                 <Image
                 style={styles.img}
-                source={{uri: 'https://cdn.icon-icons.com/icons2/882/PNG/512/1-83_icon-icons.com_68859.png'}}
+                source={require('../assets/aguardando_pesquisa.png')}
                 />
             </View>
         );
@@ -44,11 +44,16 @@ const SearchScreen = (props) => {
                     <Text style={styles.nameStyle}>{cityClimate.city}  </Text>
                     <FontAwesome name="map-marker" size={28} color='#E73E2B'/>
                 </View>
+                <Text style={styles.description}>Tempo: {cityClimate.description}</Text>
                 <View style={styles.itensStyle}>
                     <CardInfo title={"Data"} value={cityClimate.date}/>
-                    <CardInfo title={"Tempo"} value={cityClimate.description}/>
-                    <CardInfo title={"Umidade"} value={cityClimate.humidity}/>
+                    <CardInfo title={"Hora"} value={cityClimate.time}/>
+                    <CardInfo title={"Temperatura ºC"} value={cityClimate.temp}/>
+                    <CardInfo title={"Umidade %"} value={cityClimate.humidity}/>
                     <CardInfo title={"Vento"} value={cityClimate.wind_speedy}/>
+                    <CardInfo title={"Céu"} value={cityClimate.condition_slug}/>
+                    <CardInfo title={"Nascer do sol"} value={cityClimate.sunrise}/>
+                    <CardInfo title={"Pôr do sol"} value={cityClimate.sunset}/>
                 </View>
             </View>
     );
@@ -56,18 +61,14 @@ const SearchScreen = (props) => {
 
 const styles = StyleSheet.create({
     itensStyle: {
-        flex: 1,
         alignItems: 'center',
+        alignSelf: 'center',
         justifyContent: 'space-between',
         backgroundColor: '#006092',
         borderRadius: 20,
         flexDirection: 'row',
         flexWrap: 'wrap',
-        marginTop: 30,
-        marginBottom: 390,
-        marginLeft: 10,
-        marginRight: 10
-
+        margin: 10,
     },
     nameStyle: {
         color: 'black',
@@ -85,11 +86,21 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row',
-        marginTop: 30   
+        margin: 10   
     },
     img: {
         width: 200,
         height: 200
+    },
+    containerInicial:{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    description:{
+        color: '#006092',
+        fontSize: 15,
+        alignSelf: 'center',
     }
 })
 
