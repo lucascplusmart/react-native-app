@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import CardInfo from '../components/CardInfo';
 import { FontAwesome } from '@expo/vector-icons';
 
+var config = require('../config.json');
+
 const SearchScreen = (props) => {
 
     if (props.cityName === '') {
@@ -19,11 +21,9 @@ const SearchScreen = (props) => {
     }
     const [cityClimate, setCityClimate] = useState({})
 
-    //console.log(cityClimate)
-
     const getRequest = async () => {
         
-        api.get(`/weather?key=c1c886d3&city_name=${props.cityName}`)
+        api.get(`/weather?key=${config.key_01}&city_name=${props.cityName}`)
             .then((response) => {    
                 setCityClimate(response.data.results)
             })
