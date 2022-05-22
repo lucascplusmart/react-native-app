@@ -14,10 +14,6 @@ const renderItem = ({ item }) => (
 	
 );
 
-
-
-
-
 function WeatherList(props) {
 	return (
 		<FlatList

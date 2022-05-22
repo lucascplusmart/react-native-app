@@ -20,7 +20,11 @@ const CardView = (props) => {
                 <Feather style={styles.cardIcon} name="cloud-rain" size={40} color="white" />
             ) 
             
-        }         
+        }else if (props.icon === "cloud"){
+            return <Feather name="cloud" size={40} color="white" />
+        }else{
+            return <Feather name="cloud-off" size={40} color="white" />
+        }      
     }
     return (
         <View style={[styles.card, {backgroundColor: props.backgroundColor}]}>

@@ -20,11 +20,15 @@ const SendEmail = (props) => {
 
     const send = (textDestinatario) => {
         setUserEmailDestinatario(textDestinatario)
-        console.log(userEmailDestinatario)
         SendEmailUser(
             userEmailDestinatario,
             'Informações sobre o clima',
-            'Dados clima',
+            `Informações: \n 
+                -Hora da medição: ${props.data.time}
+                -Tempo: ${props.data.temp} 
+                -Cidade: ${props.data.city} 
+                -Descrição: ${props.data.description}
+                `,
             { cc:null }
         )
     }

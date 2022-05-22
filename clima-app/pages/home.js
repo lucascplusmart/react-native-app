@@ -28,7 +28,7 @@ const HomeScreen = (props) => {
             )
         } else {
             return (
-                <MaterialCommunityIcons style={styles.iconSun} name="moon-waning-crescent" size={24} color="black" />
+                <MaterialCommunityIcons style={styles.iconSun} name="moon-waning-crescent" size={50} color="black" />
             )
         }
     }
@@ -111,19 +111,15 @@ const styles = StyleSheet.create({
         fontSize: 35,
 
     },
-    cardView: {
-        margin: 10,
-        flexDirection: 'row',
-        alignItems: 'center'
-
-    },
-    info: {
+    info: {      
         alignItems: 'center',
         backgroundColor: '#006092',
         borderRadius: 28,
         width: 0.9 * WindowWidth,
         height: 0.3 * WindowHeight,
-        margin: 10
+        margin: 10,
+        alignItems: 'center',
+        justifyContent: 'space-between',
     },
     infoText: {
         color: 'white',
@@ -131,6 +127,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     infoCards: {
+        flex: 1,
         flexDirection: 'row',
         flexWrap: 'wrap'
     }

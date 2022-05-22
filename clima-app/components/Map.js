@@ -1,5 +1,5 @@
 import MapView, { Marker } from 'react-native-maps';
-import { StyleSheet, View, Dimensions } from 'react-native';
+import { StyleSheet, View} from 'react-native';
 import { WindowWidth } from '../utils/dimesion';
 
 const Map = (props) => {
