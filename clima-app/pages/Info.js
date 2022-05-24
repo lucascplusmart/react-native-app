@@ -28,13 +28,10 @@ const InfoScreen = () => {
     const [data, setData] = useState()
 
     const getMovieRequest = async () => {
-
-
         const url = "https://api.github.com/repos/lucascplusmart/react-native-app/assignees"
-
         const response = await fetch(url)
         const responseJson = await response.json()
-        console.log(responseJson)
+
         if (responseJson) {
             setData(responseJson)
         }
