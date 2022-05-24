@@ -11,8 +11,6 @@ import { WindowHeight } from '../utils/dimesion';
 
 
 const renderItem = ({ item }) => (
-    
-    
         <View style={styles.listItem}>
             <Image source={{ uri: item.avatar_url }} style={{ width: 60, height: 60, borderRadius: 30 }} />
             <View style={{ alignItems: "center", flex: 1 }}>
