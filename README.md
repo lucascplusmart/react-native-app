@@ -1,3 +1,7 @@
 # react-native-app
 
-[![Watch the video](https://github.com/lucascplusmart/react-native-app/blob/main/video/apresentacao.mp4)]([https://youtu.be/vt5fpE0bzSY](https://github.com/lucascplusmart/react-native-app/blob/main/video/apresentacao.mp4))
+https://user-images.githubusercontent.com/50277203/171295994-13432784-7501-4b07-9ba7-e53741a38505.mp4
+
+
+
+
