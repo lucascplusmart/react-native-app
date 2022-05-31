@@ -46,7 +46,7 @@ const InfoScreen = () => {
         <View>
             <View style={styles.text}>
                 <Text >
-                    Esse aplicativo foi pensado e desenvolvido por (nossos nomes), visando a obtenção da nota parcial da disciplina de Projeto de Sistema Web I, 
+                    Esse aplicativo foi pensado e desenvolvido por, Ingrid,Lucas, Pedro, visando a obtenção da nota parcial da disciplina de Projeto de Sistema Web I, 
                     do curso de Sistemas de Informação do Instituto Federal de Educação, Ciência e Tecnologia do Ceará, campus Crato. 
                     O app foi desenvolvido em React Native e faz uso das APIs (Application Programming Interface) HG Weather e Linkin. 
                     Para seu bom funcionamento, necessita da localização do dispositivo (coletada mediante permissão) e 
